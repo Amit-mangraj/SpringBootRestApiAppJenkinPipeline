@@ -1,0 +1,64 @@
+# JavSpringBootRESTAPIappWIthCICDPipeLine
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Amit-mangraj/JavSpringBootRESTAPIappWIthCICDPipeLine.git
+git push -u origin main
+
+
+Create 3 EC2 instance and launch
+1.Jenkins
+2.SonarQube
+3.Docker
+
+connect to Ec2 Instance
+1.go to path where SSH-KEY-PAIR_JENKINS.pem file download
+2.C:\Users\nEW u\Downloads>ssh -i SSH-KEY-PAIR-JENKINS.pem ubuntu@ip_address_of_instance
+3.sudo apt update
+4.sudo apt install openjdk-11-jre
+
+Install Jenkins in Jenkins Instance
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+Got to Securty tab in Jenkins instance
+ click on securitgroup and then Edit inbound rule and then add rule to add port 8080
+
+ Check status of Jenkins
+ systemctl status jenkins
+ copy secret key
+
+use this url for jenkin page
+ instance_ipadress:8080
+ add the secret key
+ install plugins
+ add username and password(admin admin)
+
+Connect Jenkin to github
+ 1.create new item 
+ 2.goto source code check git and github hook trigger
+ 3.create webhook in github
+ 4.add jenkin url instace_ip:8080/github-webhook/
+ 5.custom setting and check pull request and pushes
+
+ Setup sonarqube
+ 1.go to path where SSH-KEY-PAIR_JENKINS.pem file download
+2.C:\Users\nEW u\Downloads>ssh -i SSH-KEY-PAIR-JENKINS.pem ubuntu@ip_address_of_instance
+3.sudo apt update
+4.sudo apt install openjdk-17-jre
+5.wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.2.0.77647.zip
+6.sudo apt install unzip
+7.sudo unzip sonarqube-10.2.0.77647.zip
+8.chmod 777 -R sonarqube-10.2.0.77647
+9.cd sonarqube-10.2.0.77647/bin/linux-x86-64
+10./sonar.sh start
+11.goto sonar ec2 instance and click on security and the security groups and create a inbound rule , then add a rule 9000 port
+12.url--> sonar_instancs_ip/9000 admin admin
+
