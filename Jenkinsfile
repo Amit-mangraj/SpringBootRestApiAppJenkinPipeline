@@ -8,8 +8,8 @@ node {
   }
 
  stage('SonarQube analysis') {
-    withSonarQubeEnv(credentialsId: 'sqa_91d635a7b99d7c6e8369a0a6a1d650c4c97e4b20', installationName: 'sonar-token') { // You can override the credential to be used
-      sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar'
+    withSonarQubeEnv('sonarVersion10.2-server') { // You can override the credential to be used
+      sh 'mvn admin:sonar'
     }
   }
 }
