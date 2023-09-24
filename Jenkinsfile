@@ -9,7 +9,7 @@ node {
 
  stage('SonarQube analysis') {
     withSonarQubeEnv('sonarVersion10.2-server') { // You can override the credential to be used
-      sh 'mvn sonar:sonar'
+      sh "mvn admin:sonar"
     }
   }
 }
